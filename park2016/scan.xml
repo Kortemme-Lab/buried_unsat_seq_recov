@@ -19,8 +19,6 @@
         scorefxn="%%sfxn%%" 
         task_operations="seqpos,ex,aro,cur"
         relax_mover="min"
-        dump_pdb="1" 
-        dump_pdb_name="%%out_pdb%%" 
         report_all="1"
         score_log_file="%%out_score%%"/>
   </FILTERS>
