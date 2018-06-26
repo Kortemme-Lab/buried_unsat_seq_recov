@@ -19,5 +19,4 @@ $BIN/rosetta_scripts.$ROSETTA_BUILD                                     \
         sfxn=$SFXN                                                      \
         in_resfile=$INPUTS/resfile/$PDB.resfile                         \
         out_score=$OUTPUTS/$SFXN/score/$PDB.scores                      \
-        out_pdb=$OUTPUTS/$SFXN/pdb/$PDB.pdb                             \
 
