@@ -1,0 +1,786 @@
+core.init: Checking for fconfig files in pwd and ./rosetta/flags 
+core.init: Rosetta version: 2018.25.post.dev+63.master.e1d272e e1d272e79550f4d4a7c13dc0697b91a4ea096348 git@github.com:RosettaCommons/main.git 2018-06-22T17:36:58
+core.init: command: /netapp/home/kale/rosetta/master/source/bin/rosetta_scripts.linuxgccrelease -in:file:s park2016/pdb/orig/1XU1.pdb -out:prefix park2016/pdb/ref_buns_10/ -out:no_nstruct_label -out:overwrite -relax:constrain_relax_to_start_coords -relax:coord_constrain_sidechains -relax:ramp_constraints false -parser:protocol relax.xml -parser:script_vars sfxn=ref_buns_10
+core.init: 'RNG device' seed mode, using '/dev/urandom', seed=1668122145 seed_offset=0 real_seed=1668122145
+core.init.random: RandomGenerator:init: Normal mode, seed=1668122145 RG_type=mt19937
+core.init: Resolved executable path: /netapp/home/kale/research/software/tools/rosetta/master/source/build/src/release/linux/2.6/64/x86/gcc/4.4/default/rosetta_scripts.default.linuxgccrelease
+core.init: Looking for database based on location of executable: /netapp/home/kale/research/software/tools/rosetta/master/database/
+protocols.jd2.PDBJobInputter: Instantiate PDBJobInputter
+protocols.jd2.PDBJobInputter: PDBJobInputter::fill_jobs
+protocols.jd2.PDBJobInputter: pushed park2016/pdb/orig/1XU1.pdb nstruct index 1
+protocols.evaluation.ChiWellRmsdEvaluatorCreator: Evaluation Creator active ... 
+protocols.jd2.PDBJobInputter: PDBJobInputter::pose_from_job
+protocols.jd2.PDBJobInputter: filling pose from PDB park2016/pdb/orig/1XU1.pdb
+core.chemical.GlobalResidueTypeSet: Finished initializing fa_standard residue type set.  Created 608 residue types
+core.chemical.GlobalResidueTypeSet: Total time to initialize 1.43 seconds.
+core.import_pose.import_pose: File 'park2016/pdb/orig/1XU1.pdb' automatically determined to be of type PDB
+core.conformation.Conformation: Found disulfide between residues 83 98
+core.conformation.Conformation: current variant for 83 CYS
+core.conformation.Conformation: current variant for 98 CYS
+core.conformation.Conformation: current variant for 83 CYD
+core.conformation.Conformation: current variant for 98 CYD
+core.conformation.Conformation: Found disulfide between residues 220 235
+core.conformation.Conformation: current variant for 220 CYS
+core.conformation.Conformation: current variant for 235 CYS
+core.conformation.Conformation: current variant for 220 CYD
+core.conformation.Conformation: current variant for 235 CYD
+core.conformation.Conformation: Found disulfide between residues 357 372
+core.conformation.Conformation: current variant for 357 CYS
+core.conformation.Conformation: current variant for 372 CYS
+core.conformation.Conformation: current variant for 357 CYD
+core.conformation.Conformation: current variant for 372 CYD
+core.conformation.Conformation: Found disulfide between residues 412 427
+core.conformation.Conformation: current variant for 412 CYS
+core.conformation.Conformation: current variant for 427 CYS
+core.conformation.Conformation: current variant for 412 CYD
+core.conformation.Conformation: current variant for 427 CYD
+core.conformation.Conformation: Found disulfide between residues 430 441
+core.conformation.Conformation: current variant for 430 CYS
+core.conformation.Conformation: current variant for 441 CYS
+core.conformation.Conformation: current variant for 430 CYD
+core.conformation.Conformation: current variant for 441 CYD
+core.conformation.Conformation: Found disulfide between residues 434 445
+core.conformation.Conformation: current variant for 434 CYS
+core.conformation.Conformation: current variant for 445 CYS
+core.conformation.Conformation: current variant for 434 CYD
+core.conformation.Conformation: current variant for 445 CYD
+protocols.rosetta_scripts.RosettaScriptsParser: dock_design_filename=relax.xml
+protocols.rosetta_scripts.RosettaScriptsParser: Including RosettaScripts XML file shared_defs.xml.
+protocols.rosetta_scripts.RosettaScriptsParser: Variable substitution will occur with the following values: '%%sfxn%%'='ref_buns_10';  
+protocols.rosetta_scripts.RosettaScriptsParser: Substituted script:
+<ROSETTASCRIPTS>
+
+    <SCOREFXNS>
+    <ScoreFunction name="ref" weights="ref2015.wts"/>
+    <ScoreFunction name="ref_buns_02" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="0.2"/>
+    </ScoreFunction>
+    <ScoreFunction name="ref_buns_04" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="0.4"/>
+    </ScoreFunction>
+    <ScoreFunction name="ref_buns_06" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="0.6"/>
+    </ScoreFunction>
+    <ScoreFunction name="ref_buns_08" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="0.8"/>
+    </ScoreFunction>
+    <ScoreFunction name="ref_buns_10" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="1.0"/>
+    </ScoreFunction>
+  </SCOREFXNS>
+
+  <TASKOPERATIONS>
+    <ExtraRotamersGeneric name="ex" ex1="yes" ex2="yes" extrachi_cutoff="0"/>
+    <LimitAromaChi2 name="aro" include_trp="yes"/>
+    <IncludeCurrent name="cur"/>
+    <RestrictToRepacking name="nataa"/>
+  </TASKOPERATIONS>
+
+
+  <MOVERS>
+    <FastRelax name="relax"
+      scorefxn="ref_buns_10"
+      task_operations="ex,aro,cur">
+      <MoveMap bb="yes" chi="yes" jump="no"/>
+    </FastRelax>
+
+    <PackRotamersMover
+      name="repack"
+      scorefxn="ref_buns_10"
+      task_operations="nataa,ex,aro,cur"/>
+  </MOVERS>
+
+  <FILTERS>
+    <BuriedUnsatHbonds
+      name="buried_unsats"
+      scorefxn="ref"
+      report_all_unsats="yes"
+      print_out_info_to_pdb="yes"/>
+  </FILTERS>
+
+  <PROTOCOLS>
+    <!--
+      Use the following command line options:
+        -relax:constrain_relax_to_start_coords                              \
+        -relax:coord_constrain_sidechains                                   \
+        -relax:ramp_constraints false                                       \
+    -->
+    <Add mover_name="relax"/>
+    <Add mover_name="repack"/>
+    <Add filter_name="buried_unsats"/>
+  </PROTOCOLS>
+
+  <OUTPUT scorefxn="ref_buns_10"/>
+
+</ROSETTASCRIPTS>
+
+protocols.rosetta_scripts.RosettaScriptsParser: Generating XML Schema for rosetta_scripts...
+protocols.rosetta_scripts.RosettaScriptsParser: ...done
+protocols.rosetta_scripts.RosettaScriptsParser: Initializing schema validator...
+protocols.rosetta_scripts.RosettaScriptsParser: ...done
+protocols.rosetta_scripts.RosettaScriptsParser: Validating input script...
+protocols.rosetta_scripts.RosettaScriptsParser: ...done
+protocols.rosetta_scripts.RosettaScriptsParser: Parsed script:
+<ROSETTASCRIPTS>
+	<SCOREFXNS>
+		<ScoreFunction name="ref" weights="ref2015.wts"/>
+		<ScoreFunction name="ref_buns_02" weights="ref2015.wts">
+			<Reweight scoretype="buried_unsatisfied_penalty" weight="0.2"/>
+		</ScoreFunction>
+		<ScoreFunction name="ref_buns_04" weights="ref2015.wts">
+			<Reweight scoretype="buried_unsatisfied_penalty" weight="0.4"/>
+		</ScoreFunction>
+		<ScoreFunction name="ref_buns_06" weights="ref2015.wts">
+			<Reweight scoretype="buried_unsatisfied_penalty" weight="0.6"/>
+		</ScoreFunction>
+		<ScoreFunction name="ref_buns_08" weights="ref2015.wts">
+			<Reweight scoretype="buried_unsatisfied_penalty" weight="0.8"/>
+		</ScoreFunction>
+		<ScoreFunction name="ref_buns_10" weights="ref2015.wts">
+			<Reweight scoretype="buried_unsatisfied_penalty" weight="1.0"/>
+		</ScoreFunction>
+	</SCOREFXNS>
+	<TASKOPERATIONS>
+		<ExtraRotamersGeneric ex1="yes" ex2="yes" extrachi_cutoff="0" name="ex"/>
+		<LimitAromaChi2 include_trp="yes" name="aro"/>
+		<IncludeCurrent name="cur"/>
+		<RestrictToRepacking name="nataa"/>
+	</TASKOPERATIONS>
+	<MOVERS>
+		<FastRelax name="relax" scorefxn="ref_buns_10" task_operations="ex,aro,cur">
+			<MoveMap bb="yes" chi="yes" jump="no"/>
+		</FastRelax>
+		<PackRotamersMover name="repack" scorefxn="ref_buns_10" task_operations="nataa,ex,aro,cur"/>
+	</MOVERS>
+	<FILTERS>
+		<BuriedUnsatHbonds name="buried_unsats" print_out_info_to_pdb="yes" report_all_unsats="yes" scorefxn="ref"/>
+	</FILTERS>
+	<PROTOCOLS>
+		<Add mover_name="relax"/>
+		<Add mover_name="repack"/>
+		<Add filter_name="buried_unsats"/>
+	</PROTOCOLS>
+	<OUTPUT scorefxn="ref_buns_10"/>
+</ROSETTASCRIPTS>
+core.scoring.ScoreFunctionFactory: SCOREFUNCTION: ref2015
+core.scoring.etable: Starting energy table calculation
+core.scoring.etable: smooth_etable: changing atr/rep split to bottom of energy well
+core.scoring.etable: smooth_etable: spline smoothing lj etables (maxdis = 6)
+core.scoring.etable: smooth_etable: spline smoothing solvation etables (max_dis = 6)
+core.scoring.etable: Finished calculating energy tables.
+basic.io.database: Database file opened: scoring/score_functions/hbonds/ref2015_params/HBPoly1D.csv
+basic.io.database: Database file opened: scoring/score_functions/hbonds/ref2015_params/HBFadeIntervals.csv
+basic.io.database: Database file opened: scoring/score_functions/hbonds/ref2015_params/HBEval.csv
+basic.io.database: Database file opened: scoring/score_functions/hbonds/ref2015_params/DonStrength.csv
+basic.io.database: Database file opened: scoring/score_functions/hbonds/ref2015_params/AccStrength.csv
+basic.io.database: Database file opened: scoring/score_functions/rama/fd/all.ramaProb
+basic.io.database: Database file opened: scoring/score_functions/rama/fd/prepro.ramaProb
+basic.io.database: Database file opened: scoring/score_functions/omega/omega_ppdep.all.txt
+basic.io.database: Database file opened: scoring/score_functions/omega/omega_ppdep.gly.txt
+basic.io.database: Database file opened: scoring/score_functions/omega/omega_ppdep.pro.txt
+basic.io.database: Database file opened: scoring/score_functions/omega/omega_ppdep.valile.txt
+basic.io.database: Database file opened: scoring/score_functions/P_AA_pp/P_AA
+basic.io.database: Database file opened: scoring/score_functions/P_AA_pp/P_AA_n
+core.scoring.P_AA: shapovalov_lib::shap_p_aa_pp_smooth_level of 1( aka low_smooth ) got activated.
+basic.io.database: Database file opened: scoring/score_functions/P_AA_pp/shapovalov/10deg/kappa131/a20.prop
+core.scoring.etable: Starting energy table calculation
+core.scoring.etable: smooth_etable: changing atr/rep split to bottom of energy well
+core.scoring.etable: smooth_etable: spline smoothing lj etables (maxdis = 6)
+core.scoring.etable: smooth_etable: spline smoothing solvation etables (max_dis = 6)
+core.scoring.etable: Finished calculating energy tables.
+basic.io.database: Database file opened: scoring/score_functions/PairEPotential/pdb_pair_stats_fine
+basic.io.database: Database file opened: scoring/score_functions/InterchainPotential/interchain_env_log.txt
+basic.io.database: Database file opened: scoring/score_functions/InterchainPotential/interchain_pair_log.txt
+basic.io.database: Database file opened: scoring/score_functions/EnvPairPotential/env_log.txt
+basic.io.database: Database file opened: scoring/score_functions/EnvPairPotential/cbeta_den.txt
+basic.io.database: Database file opened: scoring/score_functions/EnvPairPotential/pair_log.txt
+basic.io.database: Database file opened: scoring/score_functions/EnvPairPotential/cenpack_log.txt
+core.scoring.ramachandran: shapovalov_lib::shap_rama_smooth_level of 4( aka highest_smooth ) got activated.
+basic.io.database: Database file opened: scoring/score_functions/rama/shapovalov/kappa25/all.ramaProb
+protocols.jd2.parser.ScoreFunctionLoader: defined score function "ref" with weights "ref2015.wts"
+protocols.jd2.parser.ScoreFunctionLoader: defined score function "ref_buns_02" with weights "ref2015.wts"
+protocols.jd2.parser.ScoreFunctionLoader:  setting ref_buns_02 weight buried_unsatisfied_penalty to 0.2
+protocols.jd2.parser.ScoreFunctionLoader: defined score function "ref_buns_04" with weights "ref2015.wts"
+protocols.jd2.parser.ScoreFunctionLoader:  setting ref_buns_04 weight buried_unsatisfied_penalty to 0.4
+protocols.jd2.parser.ScoreFunctionLoader: defined score function "ref_buns_06" with weights "ref2015.wts"
+protocols.jd2.parser.ScoreFunctionLoader:  setting ref_buns_06 weight buried_unsatisfied_penalty to 0.6
+protocols.jd2.parser.ScoreFunctionLoader: defined score function "ref_buns_08" with weights "ref2015.wts"
+protocols.jd2.parser.ScoreFunctionLoader:  setting ref_buns_08 weight buried_unsatisfied_penalty to 0.8
+protocols.jd2.parser.ScoreFunctionLoader: defined score function "ref_buns_10" with weights "ref2015.wts"
+protocols.jd2.parser.ScoreFunctionLoader:  setting ref_buns_10 weight buried_unsatisfied_penalty to 1
+protocols.jd2.parser.TaskOperationLoader: Defined TaskOperation named "ex" of type ExtraRotamersGeneric
+protocols.jd2.parser.TaskOperationLoader: Defined TaskOperation named "aro" of type LimitAromaChi2
+core.pack.task.operation.TaskOperation: TaskOperation::parse_tag method called with no effect for Tag with type IncludeCurrent. Probably due to (un/mis)implemented virtual method in derived class.
+protocols.jd2.parser.TaskOperationLoader: Defined TaskOperation named "cur" of type IncludeCurrent
+protocols.jd2.parser.TaskOperationLoader: Defined TaskOperation named "nataa" of type RestrictToRepacking
+protocols.relax.FastRelax: ================== Using default script - no constraint ramping ==================
+core.pack.task.xml_util: Object relax reading the following task_operations: Adding the following task operations
+ex aro cur 
+protocols.relax.FastRelax: ================== Using default script ==================
+protocols.rosetta_scripts.RosettaScriptsParser: Defined mover named "relax" of type FastRelax
+core.pack.task.xml_util: Object repack reading the following task_operations: Adding the following task operations
+nataa ex aro cur 
+protocols.rosetta_scripts.RosettaScriptsParser: Defined mover named "repack" of type PackRotamersMover
+core.scoring.ScoreFunctionFactory: SCOREFUNCTION: ref2015
+protocols.rosetta_scripts.RosettaScriptsParser: Defined filter named "buried_unsats" of type BuriedUnsatHbonds
+protocols.rosetta_scripts.ParsedProtocol: ParsedProtocol mover with the following movers and filters
+protocols.rosetta_scripts.ParsedProtocol: added mover "relax" with filter "true_filter"
+protocols.rosetta_scripts.ParsedProtocol: added mover "repack" with filter "true_filter"
+protocols.rosetta_scripts.ParsedProtocol: added mover "NULL_MOVER" with filter "buried_unsats"
+protocols::checkpoint: Deleting checkpoints of FastRelax
+protocols.jd2.PDBJobInputter: PDBJobInputter::pose_from_job
+protocols.jd2.PDBJobInputter: filling pose from saved copy park2016/pdb/orig/1XU1.pdb
+protocols.rosetta_scripts.ParsedProtocol: =======================BEGIN MOVER FastRelax - relax=======================
+basic.io.database: Database file opened: scoring/score_functions/elec_cp_reps.dat
+core.scoring.elec.util: Read 40 countpair representative atoms
+core.pack.dunbrack.RotamerLibrary: shapovalov_lib_fixes_enable option is true.
+core.pack.dunbrack.RotamerLibrary: shapovalov_lib::shap_dun10_smooth_level of 1( aka lowest_smooth ) got activated.
+core.pack.dunbrack.RotamerLibrary: Binary rotamer library selected: /netapp/home/kale/research/software/tools/rosetta/master/database/rotamer/shapovalov/StpDwn_0-0-0/Dunbrack10.lib.bin
+core.pack.dunbrack.RotamerLibrary: Using Dunbrack library binary file '/netapp/home/kale/research/software/tools/rosetta/master/database/rotamer/shapovalov/StpDwn_0-0-0/Dunbrack10.lib.bin'.
+core.pack.dunbrack.RotamerLibrary: Dunbrack 2010 library took 0.31 seconds to load from binary
+protocols.relax.FastRelax: CMD: repeat  -121.468  0  0  0.55
+core.pack.pack_rotamers: built 41611 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 257067500 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.optimization.Minimizer: [ WARNING ] LBFGS MAX CYCLES 2000 EXCEEDED, BUT FUNC NOT CONVERGED!
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -709.755  0.0772217  0.0772217  0.011
+core.pack.pack_rotamers: built 38003 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 196846212 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -682.769  0.0993208  0.0993208  0.1375
+core.pack.pack_rotamers: built 36796 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 180592252 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -1022.7  0.538962  0.538962  0.3025
+core.pack.pack_rotamers: built 35321 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 164109092 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -963.518  0.480223  0.480223  0.55
+protocols.relax.FastRelax: MRP: 0  -963.518  -963.518  0.480223  0.480223  
+protocols.relax.FastRelax: CMD: accept_to_best  -963.518  0.480223  0.480223  0.55
+protocols.relax.FastRelax: CMD: endrepeat  -963.518  0.480223  0.480223  0.55
+core.pack.pack_rotamers: built 41243 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 255385852 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 4.76837e-09 Deriv= -945.669 Finite Diff= 7.44599e+08
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 4.16179e-09 Deriv= -45113.2 Finite Diff= 8.28621e+08
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 9.9545e-09 Deriv= -9715.27 Finite Diff= 3.44072e+08
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 4.13322e-08 Deriv= -34072.5 Finite Diff= 8.28352e+07
+core.optimization.Minimizer: Line search failed even after resetting Hessian; aborting at iter#842
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -17.0471  0.135759  0.135759  0.011
+core.pack.pack_rotamers: built 37747 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 195030972 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.optimization.Minimizer: [ WARNING ] LBFGS MAX CYCLES 2000 EXCEEDED, BUT FUNC NOT CONVERGED!
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -471.223  0.13523  0.13523  0.1375
+core.pack.pack_rotamers: built 36545 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 179234956 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -1032.18  0.508398  0.508398  0.3025
+core.pack.pack_rotamers: built 34897 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 160998608 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -945.363  0.463879  0.463879  0.55
+protocols.relax.FastRelax: MRP: 1  -945.363  -963.518  0.480223  0.480223  
+protocols.relax.FastRelax: CMD: accept_to_best  -945.363  0.463879  0.463879  0.55
+protocols.relax.FastRelax: CMD: endrepeat  -945.363  0.463879  0.463879  0.55
+core.pack.pack_rotamers: built 41088 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 256879164 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.optimization.Minimizer: [ WARNING ] LBFGS MAX CYCLES 2000 EXCEEDED, BUT FUNC NOT CONVERGED!
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -199.742  0.126833  0.126833  0.011
+core.pack.pack_rotamers: built 37850 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 195151812 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 4.76837e-09 Deriv= -70.9304 Finite Diff= 1.17938e+09
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 6.80172e-08 Deriv= -12581.8 Finite Diff= 8.26684e+07
+core.optimization.Minimizer: Line search failed even after resetting Hessian; aborting at iter#1106
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -477.227  0.135246  0.135246  0.1375
+core.pack.pack_rotamers: built 36457 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 176615624 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -982.199  0.539201  0.539201  0.3025
+core.pack.pack_rotamers: built 34956 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 161836588 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -944.443  0.476305  0.476305  0.55
+protocols.relax.FastRelax: MRP: 2  -944.443  -963.518  0.480223  0.480223  
+protocols.relax.FastRelax: CMD: accept_to_best  -944.443  0.476305  0.476305  0.55
+protocols.relax.FastRelax: CMD: endrepeat  -944.443  0.476305  0.476305  0.55
+core.pack.pack_rotamers: built 41092 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 255707520 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 9.53674e-09 Deriv= -1963.7 Finite Diff= 1.26165e+09
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 7.43051e-09 Deriv= -24229 Finite Diff= 1.61913e+09
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 2.24318e-08 Deriv= -115678 Finite Diff= 5.36226e+08
+core.optimization.Minimizer: Line search failed even after resetting Hessian; aborting at iter#707
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  1094.84  0.210267  0.210267  0.011
+core.pack.pack_rotamers: built 37661 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 193664724 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 9.53674e-09 Deriv= -644.401 Finite Diff= 1.17596e+09
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 6.09477e-09 Deriv= -3454.71 Finite Diff= 1.83859e+09
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 6.92006e-09 Deriv= -2727.31 Finite Diff= 1.62061e+09
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 1.25518e-07 Deriv= -3694.59 Finite Diff= 8.93437e+07
+core.optimization.Minimizer: Line search failed even after resetting Hessian; aborting at iter#387
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -112.752  0.169358  0.169358  0.1375
+core.pack.pack_rotamers: built 36406 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 177431084 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -961.812  0.533971  0.533971  0.3025
+core.pack.pack_rotamers: built 35058 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 163179984 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -893.977  0.464585  0.464585  0.55
+protocols.relax.FastRelax: MRP: 3  -893.977  -963.518  0.480223  0.480223  
+protocols.relax.FastRelax: CMD: accept_to_best  -893.977  0.464585  0.464585  0.55
+protocols.relax.FastRelax: CMD: endrepeat  -893.977  0.464585  0.464585  0.55
+core.pack.pack_rotamers: built 41346 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 263770312 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 9.53674e-09 Deriv= -9411.18 Finite Diff= 7.40885e+08
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 3.30331e-09 Deriv= -123810 Finite Diff= 2.12471e+09
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 1.85327e-08 Deriv= -169474 Finite Diff= 3.78565e+08
+core.optimization.Minimizer: Line search failed even after resetting Hessian; aborting at iter#787
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  2744.95  0.289511  0.289511  0.011
+core.pack.pack_rotamers: built 37047 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 186961496 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 4.76837e-09 Deriv= -687.541 Finite Diff= 2.40072e+09
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 4.31399e-09 Deriv= -5310.34 Finite Diff= 2.65207e+09
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 9.22172e-09 Deriv= -4136.37 Finite Diff= 1.24136e+09
+core.optimization.LineMinimizer: [ ERROR ] Inaccurate G! step= 1.48094e-07 Deriv= -2654.03 Finite Diff= 7.72961e+07
+core.optimization.Minimizer: Line search failed even after resetting Hessian; aborting at iter#1162
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  73.8467  0.186713  0.186713  0.1375
+core.pack.pack_rotamers: built 36159 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 173509976 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -923.848  0.549537  0.549537  0.3025
+core.pack.pack_rotamers: built 34522 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 155346676 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Disabling BuriedUnsatPenalty scoreterm during minimization trajectory.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Re-enabling BuriedUnsatPenalty scoreterm after minimization trajectory.
+protocols.relax.FastRelax: CMD: ramp_repack_min  -837.829  0.517478  0.517478  0.55
+protocols.relax.FastRelax: MRP: 4  -837.829  -963.518  0.480223  0.480223  
+protocols.relax.FastRelax: CMD: accept_to_best  -837.829  0.517478  0.517478  0.55
+protocols.relax.FastRelax: CMD: endrepeat  -837.829  0.517478  0.517478  0.55
+protocols::checkpoint: Deleting checkpoints of FastRelax
+protocols.rosetta_scripts.ParsedProtocol: =======================BEGIN MOVER PackRotamersMover - repack=======================
+core.pack.pack_rotamers: built 35487 rotamers at 451 positions.
+core.pack.interaction_graph.interaction_graph_factory: Clearing cached buried unsaturated hbond graph from the pose.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 163224992 bytes
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Setting up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Creating new BuriedUnsatPenaltyGraph and caching it in the pose.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Successfully set up BuriedUnsatPenalty energy method for packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the pose after packing.
+core.pack.guidance_scoreterms.buried_unsat_penalty.BuriedUnsatPenalty: Clearing cached data from the BuriedUnsatPenalty EnergyMethod after packing.
+protocols.rosetta_scripts.ParsedProtocol: =======================BEGIN FILTER buried_unsats=======================
+protocols.simple_filters.BuriedUnsatHbondFilter: /////////////////////////////////////////////////////////////////////////////////////////
+protocols.simple_filters.BuriedUnsatHbondFilter: 
+protocols.simple_filters.BuriedUnsatHbondFilter:     USER HAS SPECIFIED CUSTOM REPORTING BEHAVIOR FOR # UNSATS
+protocols.simple_filters.BuriedUnsatHbondFilter: 
+protocols.simple_filters.BuriedUnsatHbondFilter: /////////////////////////////////////////////////////////////////////////////////////////
+protocols.simple_filters.BuriedUnsatHbondFilter: 
+basic.io.database: Database file opened: scoring/score_functions/hbonds/sp2_elec_params/HBPoly1D.csv
+basic.io.database: Database file opened: scoring/score_functions/hbonds/sp2_elec_params/HBFadeIntervals.csv
+basic.io.database: Database file opened: scoring/score_functions/hbonds/sp2_elec_params/HBEval.csv
+protocols.vardist_solaccess: VarSolDistSasaCalculator::recompute
+protocols.vardist_solaccess: VarSolDistSasaCalculator::lookup
+protocols.vardist_solaccess: VarSolDistSasaCalculator::lookup
+protocols.simple_filters.BuriedUnsatHbondFilter:   buried unsats in input pose: 
+protocols.simple_filters.BuriedUnsatHbondFilter:   all_heavy_atom_unsats = 46
+protocols.simple_filters.BuriedUnsatHbondFilter:   bb_heavy_atom_unsats = 38
+protocols.simple_filters.BuriedUnsatHbondFilter:   sc_heavy_atom_unsats = 8
+protocols.simple_filters.BuriedUnsatHbondFilter:   countable_nonheavy_unsats = 19
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 3: SER  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 3: SER  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 15: LYS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 15: LYS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 31: ARG 2HH2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 40: ASP  OD1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 60: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 62: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 67: GLN  NE2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 67: GLN 1HE2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 67: GLN 2HE2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 85: ARG  NE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 85: ARG  HE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 88: PRO  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 92: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 95: TYR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 97: SER  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 101: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 130: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 157: VAL  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 196: HIS  ND1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 196: HIS  HD1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 197: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 199: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 201: THR  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 201: THR  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 203: GLY  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 204: GLN  OE1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 225: PRO  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 227: ASP  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 227: ASP  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 232: TYR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 233: ASN 2HD2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 238: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 240: VAL  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 265: HIS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 265: HIS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 267: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 276: HIS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 276: HIS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 277: SER  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 277: SER  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 293: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 333: HIS  ND1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 333: HIS  HD1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 334: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 336: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 338: THR  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 338: THR  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 340: GLY  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 341: GLN  OE1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 359: ARG  NE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 359: ARG  HE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 362: PRO  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 368: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 369: TYR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 370: ASN 2HD2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 375: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 377: VAL  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 395: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 404: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 440: GLN  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 440: GLN  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 444: PHE  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 444: PHE  H  
+protocols.simple_filters.BuriedUnsatHbondFilter: # unsatisfied hbonds: 0. passing.
+protocols.rosetta_scripts.ParsedProtocol: =======================END FILTER buried_unsats=======================
+protocols.rosetta_scripts.ParsedProtocol: setting status to success
+protocols.simple_filters.BuriedUnsatHbondFilter: /////////////////////////////////////////////////////////////////////////////////////////
+protocols.simple_filters.BuriedUnsatHbondFilter: 
+protocols.simple_filters.BuriedUnsatHbondFilter:     USER HAS SPECIFIED CUSTOM REPORTING BEHAVIOR FOR # UNSATS
+protocols.simple_filters.BuriedUnsatHbondFilter: 
+protocols.simple_filters.BuriedUnsatHbondFilter: /////////////////////////////////////////////////////////////////////////////////////////
+protocols.simple_filters.BuriedUnsatHbondFilter: 
+protocols.vardist_solaccess: VarSolDistSasaCalculator::recompute
+protocols.vardist_solaccess: VarSolDistSasaCalculator::lookup
+protocols.vardist_solaccess: VarSolDistSasaCalculator::lookup
+protocols.simple_filters.BuriedUnsatHbondFilter:   buried unsats in input pose: 
+protocols.simple_filters.BuriedUnsatHbondFilter:   all_heavy_atom_unsats = 46
+protocols.simple_filters.BuriedUnsatHbondFilter:   bb_heavy_atom_unsats = 38
+protocols.simple_filters.BuriedUnsatHbondFilter:   sc_heavy_atom_unsats = 8
+protocols.simple_filters.BuriedUnsatHbondFilter:   countable_nonheavy_unsats = 19
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 3: SER  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 3: SER  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 15: LYS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 15: LYS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 31: ARG 2HH2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 40: ASP  OD1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 60: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 62: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 67: GLN  NE2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 67: GLN 1HE2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 67: GLN 2HE2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 85: ARG  NE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 85: ARG  HE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 88: PRO  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 92: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 95: TYR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 97: SER  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 101: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 130: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 157: VAL  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 196: HIS  ND1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 196: HIS  HD1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 197: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 199: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 201: THR  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 201: THR  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 203: GLY  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 204: GLN  OE1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 225: PRO  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 227: ASP  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 227: ASP  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 232: TYR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 233: ASN 2HD2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 238: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 240: VAL  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 265: HIS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 265: HIS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 267: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 276: HIS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 276: HIS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 277: SER  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 277: SER  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 293: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 333: HIS  ND1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 333: HIS  HD1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 334: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 336: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 338: THR  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 338: THR  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 340: GLY  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 341: GLN  OE1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 359: ARG  NE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 359: ARG  HE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 362: PRO  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 368: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 369: TYR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 370: ASN 2HD2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 375: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 377: VAL  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 395: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 404: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 440: GLN  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 440: GLN  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 444: PHE  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 444: PHE  H  
+protocols.rosetta_scripts.ParsedProtocol.REPORT: ============Begin report for buried_unsats==================
+protocols.simple_filters.BuriedUnsatHbondFilter: /////////////////////////////////////////////////////////////////////////////////////////
+protocols.simple_filters.BuriedUnsatHbondFilter: 
+protocols.simple_filters.BuriedUnsatHbondFilter:     USER HAS SPECIFIED CUSTOM REPORTING BEHAVIOR FOR # UNSATS
+protocols.simple_filters.BuriedUnsatHbondFilter: 
+protocols.simple_filters.BuriedUnsatHbondFilter: /////////////////////////////////////////////////////////////////////////////////////////
+protocols.simple_filters.BuriedUnsatHbondFilter: 
+protocols.vardist_solaccess: VarSolDistSasaCalculator::recompute
+protocols.vardist_solaccess: VarSolDistSasaCalculator::lookup
+protocols.vardist_solaccess: VarSolDistSasaCalculator::lookup
+protocols.simple_filters.BuriedUnsatHbondFilter:   buried unsats in input pose: 
+protocols.simple_filters.BuriedUnsatHbondFilter:   all_heavy_atom_unsats = 46
+protocols.simple_filters.BuriedUnsatHbondFilter:   bb_heavy_atom_unsats = 38
+protocols.simple_filters.BuriedUnsatHbondFilter:   sc_heavy_atom_unsats = 8
+protocols.simple_filters.BuriedUnsatHbondFilter:   countable_nonheavy_unsats = 19
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 3: SER  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 3: SER  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 15: LYS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 15: LYS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 31: ARG 2HH2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 40: ASP  OD1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 60: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 62: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 67: GLN  NE2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 67: GLN 1HE2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 67: GLN 2HE2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 85: ARG  NE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 85: ARG  HE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 88: PRO  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 92: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 95: TYR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 97: SER  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 101: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 130: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 157: VAL  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 196: HIS  ND1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 196: HIS  HD1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 197: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 199: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 201: THR  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 201: THR  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 203: GLY  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 204: GLN  OE1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 225: PRO  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 227: ASP  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 227: ASP  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 232: TYR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 233: ASN 2HD2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 238: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 240: VAL  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 265: HIS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 265: HIS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 267: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 276: HIS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 276: HIS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 277: SER  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 277: SER  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 293: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 333: HIS  ND1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 333: HIS  HD1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 334: ASP  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 336: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 338: THR  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 338: THR  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 340: GLY  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 341: GLN  OE1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 359: ARG  NE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 359: ARG  HE 
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 362: PRO  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 368: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 369: TYR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 370: ASN 2HD2
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 375: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 377: VAL  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 395: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 404: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 440: GLN  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 440: GLN  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 444: PHE  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 444: PHE  H  
+protocols.rosetta_scripts.ParsedProtocol.REPORT: # unsatisfied hbonds: 0
+============End report for buried_unsats==================
+protocols.jd2.JobDistributor: park2016/pdb/ref_buns_10/1XU1 reported success in 22777 seconds
+protocols.jd2.JobDistributor: no more batches to process... 
+protocols.jd2.JobDistributor: 1 jobs considered, 1 jobs attempted in 22778 seconds
+protocols::checkpoint: Deleting checkpoints of FastRelax

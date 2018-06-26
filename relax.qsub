@@ -9,4 +9,4 @@ qsub \
     -t 1-$NUM_PDBS \
     -o $INPUTS/pdb/$SFXN/logs \
     -v SFXN=${SFXN} \
-    seq_recov.sh
+    relax.sh
