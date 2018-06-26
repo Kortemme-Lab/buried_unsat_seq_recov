@@ -9,6 +9,6 @@ rm -rf $INPUTS/pdb/$SFXN/*
 
 qsub \
     -t 1-$NUM_PDBS \
-    -o $INPUTS/pdb/$SFXN/logs \
+    -o $INPUTS/pdb/$SFXN/log \
     -v SFXN=${SFXN} \
     relax.sh
