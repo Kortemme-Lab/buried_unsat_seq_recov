@@ -1,0 +1,3 @@
+SEQUENCE: 
+SCORE: total_score buried_unsats dslf_fa13    fa_atr    fa_dun   fa_elec fa_intra_rep fa_intra_sol_xover4              fa_rep              fa_sol hbond_bb_sc hbond_lr_bb    hbond_sc hbond_sr_bb lk_ball_wtd       omega     p_aa_pp pro_close rama_prepro         ref yhh_planarity description 
+SCORE:    -988.245         0.000    -4.921 -2191.462   414.097  -615.984        3.910              67.946             295.085            1294.435     -67.443     -85.432     -63.945    -118.923     -56.730      44.407     -73.709     1.862      22.489     145.002         1.071 ./park2016/pdb/ref/2ABZ

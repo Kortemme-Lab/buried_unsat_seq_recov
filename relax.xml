@@ -1,0 +1,41 @@
+<ROSETTASCRIPTS>
+
+  <xi:include href="shared_defs.xml"/>
+
+  <MOVERS>
+    <FastRelax name="relax"
+      scorefxn="%%sfxn%%"
+      task_operations="ex,aro,cur">
+      <MoveMap bb="yes" chi="yes" jump="no"/>
+    </FastRelax>
+
+    <PackRotamersMover
+      name="repack"
+      scorefxn="%%sfxn%%"
+      task_operations="nataa,ex,aro,cur"/>
+  </MOVERS>
+
+  <FILTERS>
+    <BuriedUnsatHbonds
+      name="buried_unsats"
+      scorefxn="ref"
+      report_all_unsats="yes"
+      print_out_info_to_pdb="yes"/>
+  </FILTERS>
+
+  <PROTOCOLS>
+    <!--
+      Use the following command line options:
+        -relax:constrain_relax_to_start_coords                              \
+        -relax:coord_constrain_sidechains                                   \
+        -relax:ramp_constraints false                                       \
+    -->
+    <Add mover_name="relax"/>
+    <Add mover_name="repack"/>
+    <Add filter_name="buried_unsats"/>
+  </PROTOCOLS>
+
+  <OUTPUT scorefxn="%%sfxn%%"/>
+
+</ROSETTASCRIPTS>
+

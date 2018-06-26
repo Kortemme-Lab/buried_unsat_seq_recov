@@ -1,0 +1,62 @@
+protocols.simple_filters.BuriedUnsatHbondFilter:   buried unsats in input pose: 
+protocols.simple_filters.BuriedUnsatHbondFilter:   all_heavy_atom_unsats = 36
+protocols.simple_filters.BuriedUnsatHbondFilter:   bb_heavy_atom_unsats = 32
+protocols.simple_filters.BuriedUnsatHbondFilter:   sc_heavy_atom_unsats = 4
+protocols.simple_filters.BuriedUnsatHbondFilter:   countable_nonheavy_unsats = 20
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 27: HIS  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 35: GLN  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 35: GLN  OE1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 40: TYR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 41: GLU  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 41: GLU  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 53: GLY  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 64: LEU  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 67: HIS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 67: HIS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 74: GLN  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 74: GLN  OE1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 74: GLN  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 95: THR  OG1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 105: LEU  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 124: TRP  NE1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 124: TRP  HE1
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 127: THR  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 127: THR  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 128: ARG  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 128: ARG  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 129: SER  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 129: SER  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 165: TYR  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 165: TYR  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 172: VAL  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 172: VAL  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 209: ILE  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 209: ILE  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 211: ASP  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 211: ASP  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 214: GLU  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 214: GLU  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 232: THR  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 255: TYR  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 255: TYR  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 283: ILE  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 283: ILE  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 312: GLN  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 314: CYS  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 314: CYS  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 315: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 317: ILE  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 317: ILE  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 318: CYS  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 320: GLY  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 320: GLY  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 322: ALA  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 325: PRO  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 330: CYS  O  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 338: TRP  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 338: TRP  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 354: ARG  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 354: ARG  H  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied HEAVY polar atom at residue 356: THR  N  
+protocols.simple_filters.BuriedUnsatHbondFilter:       Unsatisfied Hpol polar atom at residue 356: THR  H  
+protocols.rosetta_scripts.ParsedProtocol.REPORT: # unsatisfied hbonds: 0

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -eo pipefail
+source helpers.sh
+
+NUM_PDBS=${#PDBS[*]}
+
+mkdir -p $OUTPUTS/$SFXN/log
+mkdir -p $OUTPUTS/$SFXN/misc
+mkdir -p $OUTPUTS/$SFXN/score
+mkdir -p $OUTPUTS/$SFXN/pdb
+
+rm $BENCHMARK/logs/$SFXN/*
+
+qsub \
+    -t 1-$NUM_PDBS \
+    -o $OUTPUTS/$SFXN/logs \
+    -v SFXN=${SFXN} \
+    seq_recov.sh

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eo pipefail
+source helpers.sh
+
+mkdir -p $INPUTS/pdb/$SFXN
+mkdir -p $INPUTS/pdb/$SFXN/logs
+
+qsub \
+    -t 1-$NUM_PDBS \
+    -o $INPUTS/pdb/$SFXN/logs \
+    -v SFXN=${SFXN} \
+    seq_recov.sh

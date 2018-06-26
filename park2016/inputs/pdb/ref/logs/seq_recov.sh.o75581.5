@@ -1,0 +1,826 @@
+core.init: Checking for fconfig files in pwd and ./rosetta/flags 
+core.init: Rosetta version: 2018.25.post.dev+63.master.e1d272e e1d272e79550f4d4a7c13dc0697b91a4ea096348 git@github.com:RosettaCommons/main.git 2018-06-22T17:36:58
+core.init: command: /netapp/home/kale/rosetta/master/source/bin/rosetta_scripts.linuxgccrelease -in:file:s park2016/pdb/orig/1BUH.pdb -out:prefix park2016/out/ref/ -out:no_nstruct_label -out:overwrite -parser:protocol park2016/scan.xml -parser:script_vars sfxn=ref resfile=park2016/resfile/1BUH.resfile
+core.init: 'RNG device' seed mode, using '/dev/urandom', seed=698679998 seed_offset=0 real_seed=698679998
+core.init.random: RandomGenerator:init: Normal mode, seed=698679998 RG_type=mt19937
+core.init: Resolved executable path: /netapp/home/kale/research/software/tools/rosetta/master/source/build/src/release/linux/2.6/64/x86/gcc/4.4/default/rosetta_scripts.default.linuxgccrelease
+core.init: Looking for database based on location of executable: /netapp/home/kale/research/software/tools/rosetta/master/database/
+protocols.jd2.PDBJobInputter: Instantiate PDBJobInputter
+protocols.jd2.PDBJobInputter: PDBJobInputter::fill_jobs
+protocols.jd2.PDBJobInputter: pushed park2016/pdb/orig/1BUH.pdb nstruct index 1
+protocols.evaluation.ChiWellRmsdEvaluatorCreator: Evaluation Creator active ... 
+protocols.jd2.PDBJobInputter: PDBJobInputter::pose_from_job
+protocols.jd2.PDBJobInputter: filling pose from PDB park2016/pdb/orig/1BUH.pdb
+core.chemical.GlobalResidueTypeSet: Finished initializing fa_standard residue type set.  Created 608 residue types
+core.chemical.GlobalResidueTypeSet: Total time to initialize 0.95 seconds.
+core.import_pose.import_pose: File 'park2016/pdb/orig/1BUH.pdb' automatically determined to be of type PDB
+protocols.rosetta_scripts.RosettaScriptsParser: dock_design_filename=park2016/scan.xml
+protocols.rosetta_scripts.RosettaScriptsParser: Including RosettaScripts XML file shared_defs.xml.
+protocols.rosetta_scripts.RosettaScriptsParser: Variable substitution will occur with the following values: '%%resfile%%'='park2016/resfile/1BUH.resfile';  '%%sfxn%%'='ref';  
+protocols.rosetta_scripts.RosettaScriptsParser: Substituted script:
+<ROSETTASCRIPTS>
+
+    <SCOREFXNS>
+    <ScoreFunction name="ref" weights="ref2015.wts"/>
+    <ScoreFunction name="ref_buns" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="1.0"/>
+    </ScoreFunction>
+  </SCOREFXNS>
+
+  <TASKOPERATIONS>
+    <ExtraRotamersGeneric name="ex" ex1="yes" ex2="yes" extrachi_cutoff="0"/>
+    <LimitAromaChi2 name="aro" include_trp="yes"/>
+    <IncludeCurrent name="cur"/>
+    <RestrictToRepacking name="nataa"/>
+  </TASKOPERATIONS>
+
+
+  <TASKOPERATIONS>
+    <ReadResfile name="seqpos" filename="park2016/resfile/1BUH.resfile" />
+  </TASKOPERATIONS>
+
+  <MOVERS>
+    <TaskAwareMinMover name="min" scorefxn="ref" chi="1" bb="0" jump="0" 
+        tolerance="0.00001" task_operations="seqpos,ex,aro,cur"/>
+  </MOVERS>
+
+  <FILTERS>
+    <ScoreType name="score" scorefxn="ref" threshold="0"/>
+    <Delta name="delta" filter="score"/>
+    <FilterScan name="scan" filter="score" delta_filters="delta" scorefxn="ref" 
+        delta="1" task_operations="seqpos,ex,aro,cur" dump_pdb="0" report_all="1" 
+        relax_mover="min" score_log_file="scan.log"/>
+  </FILTERS>
+
+  <PROTOCOLS>
+    <Add filter_name="scan"/>
+  </PROTOCOLS>
+
+</ROSETTASCRIPTS>
+protocols.rosetta_scripts.RosettaScriptsParser: Generating XML Schema for rosetta_scripts...
+protocols.rosetta_scripts.RosettaScriptsParser: ...done
+protocols.rosetta_scripts.RosettaScriptsParser: Initializing schema validator...
+protocols.rosetta_scripts.RosettaScriptsParser: ...done
+protocols.rosetta_scripts.RosettaScriptsParser: Validating input script...
+protocols.rosetta_scripts.RosettaScriptsParser: ...done
+protocols.rosetta_scripts.RosettaScriptsParser: Parsed script:
+<ROSETTASCRIPTS>
+	<SCOREFXNS>
+		<ScoreFunction name="ref" weights="ref2015.wts"/>
+		<ScoreFunction name="ref_buns" weights="ref2015.wts">
+			<Reweight scoretype="buried_unsatisfied_penalty" weight="1.0"/>
+		</ScoreFunction>
+	</SCOREFXNS>
+	<TASKOPERATIONS>
+		<ExtraRotamersGeneric ex1="yes" ex2="yes" extrachi_cutoff="0" name="ex"/>
+		<LimitAromaChi2 include_trp="yes" name="aro"/>
+		<IncludeCurrent name="cur"/>
+		<RestrictToRepacking name="nataa"/>
+	</TASKOPERATIONS>
+	<TASKOPERATIONS>
+		<ReadResfile filename="park2016/resfile/1BUH.resfile" name="seqpos"/>
+	</TASKOPERATIONS>
+	<MOVERS>
+		<TaskAwareMinMover bb="0" chi="1" jump="0" name="min" scorefxn="ref" task_operations="seqpos,ex,aro,cur" tolerance="0.00001"/>
+	</MOVERS>
+	<FILTERS>
+		<ScoreType name="score" scorefxn="ref" threshold="0"/>
+		<Delta filter="score" name="delta"/>
+		<FilterScan delta="1" delta_filters="delta" dump_pdb="0" filter="score" name="scan" relax_mover="min" report_all="1" score_log_file="scan.log" scorefxn="ref" task_operations="seqpos,ex,aro,cur"/>
+	</FILTERS>
+	<PROTOCOLS>
+		<Add filter_name="scan"/>
+	</PROTOCOLS>
+</ROSETTASCRIPTS>
+core.scoring.ScoreFunctionFactory: SCOREFUNCTION: ref2015
+core.scoring.etable: Starting energy table calculation
+core.scoring.etable: smooth_etable: changing atr/rep split to bottom of energy well
+core.scoring.etable: smooth_etable: spline smoothing lj etables (maxdis = 6)
+core.scoring.etable: smooth_etable: spline smoothing solvation etables (max_dis = 6)
+core.scoring.etable: Finished calculating energy tables.
+basic.io.database: Database file opened: scoring/score_functions/hbonds/ref2015_params/HBPoly1D.csv
+basic.io.database: Database file opened: scoring/score_functions/hbonds/ref2015_params/HBFadeIntervals.csv
+basic.io.database: Database file opened: scoring/score_functions/hbonds/ref2015_params/HBEval.csv
+basic.io.database: Database file opened: scoring/score_functions/hbonds/ref2015_params/DonStrength.csv
+basic.io.database: Database file opened: scoring/score_functions/hbonds/ref2015_params/AccStrength.csv
+basic.io.database: Database file opened: scoring/score_functions/rama/fd/all.ramaProb
+basic.io.database: Database file opened: scoring/score_functions/rama/fd/prepro.ramaProb
+basic.io.database: Database file opened: scoring/score_functions/omega/omega_ppdep.all.txt
+basic.io.database: Database file opened: scoring/score_functions/omega/omega_ppdep.gly.txt
+basic.io.database: Database file opened: scoring/score_functions/omega/omega_ppdep.pro.txt
+basic.io.database: Database file opened: scoring/score_functions/omega/omega_ppdep.valile.txt
+basic.io.database: Database file opened: scoring/score_functions/P_AA_pp/P_AA
+basic.io.database: Database file opened: scoring/score_functions/P_AA_pp/P_AA_n
+core.scoring.P_AA: shapovalov_lib::shap_p_aa_pp_smooth_level of 1( aka low_smooth ) got activated.
+basic.io.database: Database file opened: scoring/score_functions/P_AA_pp/shapovalov/10deg/kappa131/a20.prop
+core.scoring.etable: Starting energy table calculation
+core.scoring.etable: smooth_etable: changing atr/rep split to bottom of energy well
+core.scoring.etable: smooth_etable: spline smoothing lj etables (maxdis = 6)
+core.scoring.etable: smooth_etable: spline smoothing solvation etables (max_dis = 6)
+core.scoring.etable: Finished calculating energy tables.
+basic.io.database: Database file opened: scoring/score_functions/PairEPotential/pdb_pair_stats_fine
+basic.io.database: Database file opened: scoring/score_functions/InterchainPotential/interchain_env_log.txt
+basic.io.database: Database file opened: scoring/score_functions/InterchainPotential/interchain_pair_log.txt
+basic.io.database: Database file opened: scoring/score_functions/EnvPairPotential/env_log.txt
+basic.io.database: Database file opened: scoring/score_functions/EnvPairPotential/cbeta_den.txt
+basic.io.database: Database file opened: scoring/score_functions/EnvPairPotential/pair_log.txt
+basic.io.database: Database file opened: scoring/score_functions/EnvPairPotential/cenpack_log.txt
+core.scoring.ramachandran: shapovalov_lib::shap_rama_smooth_level of 4( aka highest_smooth ) got activated.
+basic.io.database: Database file opened: scoring/score_functions/rama/shapovalov/kappa25/all.ramaProb
+protocols.jd2.parser.ScoreFunctionLoader: defined score function "ref" with weights "ref2015.wts"
+protocols.jd2.parser.ScoreFunctionLoader: defined score function "ref_buns" with weights "ref2015.wts"
+protocols.jd2.parser.ScoreFunctionLoader:  setting ref_buns weight buried_unsatisfied_penalty to 1
+protocols.jd2.parser.TaskOperationLoader: Defined TaskOperation named "ex" of type ExtraRotamersGeneric
+protocols.jd2.parser.TaskOperationLoader: Defined TaskOperation named "aro" of type LimitAromaChi2
+core.pack.task.operation.TaskOperation: TaskOperation::parse_tag method called with no effect for Tag with type IncludeCurrent. Probably due to (un/mis)implemented virtual method in derived class.
+protocols.jd2.parser.TaskOperationLoader: Defined TaskOperation named "cur" of type IncludeCurrent
+protocols.jd2.parser.TaskOperationLoader: Defined TaskOperation named "nataa" of type RestrictToRepacking
+protocols.jd2.parser.TaskOperationLoader: Defined TaskOperation named "seqpos" of type ReadResfile
+core.pack.task.xml_util: Object min reading the following task_operations: Adding the following task operations
+seqpos ex aro cur 
+protocols.rosetta_scripts.RosettaScriptsParser: Defined mover named "min" of type TaskAwareMinMover
+protocols.simple_filters.ScoreTypeFilter: ScoreType filter for score_type total_score with threshold 0.
+protocols.rosetta_scripts.RosettaScriptsParser: Defined filter named "score" of type ScoreType
+protocols.simple_filters.DeltaFilter: DeltaFilter
+protocols.simple_filters.DeltaFilter: with options baseline: 0 range: 0 upper: 1 unbound: 0 jump: 0 and lower: 0
+protocols.rosetta_scripts.RosettaScriptsParser: Defined filter named "delta" of type Delta
+protocols.protein_interface_design.filters.FilterScanFilter: FilterScanFilter
+core.pack.task.xml_util: Object scan reading the following task_operations: Adding the following task operations
+seqpos ex aro cur 
+protocols.protein_interface_design.filters.FilterScanFilter: Using delta filters: delta,
+protocols.protein_interface_design.filters.FilterScanFilter: with options resfile_name: park2016/out/ref/1BUH.resfile resfile_general_property nataa unbound 0 jump 0 delta 1 filter score dump_pdb 0 rtmin 0
+protocols.rosetta_scripts.RosettaScriptsParser: Defined filter named "scan" of type FilterScan
+protocols.rosetta_scripts.ParsedProtocol: ParsedProtocol mover with the following movers and filters
+protocols.rosetta_scripts.ParsedProtocol: added mover "NULL_MOVER" with filter "scan"
+protocols.jd2.PDBJobInputter: PDBJobInputter::pose_from_job
+protocols.jd2.PDBJobInputter: filling pose from saved copy park2016/pdb/orig/1BUH.pdb
+protocols.rosetta_scripts.ParsedProtocol: =======================BEGIN FILTER scan=======================
+core.pack.task: Packer task: initialize from command line() 
+basic.io.database: Database file opened: scoring/score_functions/elec_cp_reps.dat
+core.scoring.elec.util: Read 40 countpair representative atoms
+core.pack.dunbrack.RotamerLibrary: shapovalov_lib_fixes_enable option is true.
+core.pack.dunbrack.RotamerLibrary: shapovalov_lib::shap_dun10_smooth_level of 1( aka lowest_smooth ) got activated.
+core.pack.dunbrack.RotamerLibrary: Binary rotamer library selected: /netapp/home/kale/research/software/tools/rosetta/master/database/rotamer/shapovalov/StpDwn_0-0-0/Dunbrack10.lib.bin
+core.pack.dunbrack.RotamerLibrary: Using Dunbrack library binary file '/netapp/home/kale/research/software/tools/rosetta/master/database/rotamer/shapovalov/StpDwn_0-0-0/Dunbrack10.lib.bin'.
+core.pack.dunbrack.RotamerLibrary: Dunbrack 2010 library took 0.35 seconds to load from binary
+core.pack.pack_rotamers: built 448 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 281240 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to GLY. Now relaxing...
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 457 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 293432 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to GLY. Now relaxing...
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 457 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 293432 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to GLY. Now relaxing...
+protocols.protein_interface_design.filters.FilterScanFilter: Computed baseline at position 169 with filter delta is -252.055
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 457 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 312384 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to ALA. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -226.657. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -226.657. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 483 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 360120 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to CYS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -211.521. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -211.521. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 486 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 365628 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to ASP. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -212.304. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -212.304. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 492 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 376644 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to GLU. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -199.78. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -199.78. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 457 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 312384 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to PHE. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -183.785. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -183.785. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 457 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 293432 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to GLY. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -252.055. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -252.055. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 469 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 334416 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to HIS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -194.733. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -194.733. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 469 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 334416 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to HIS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -194.733. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -194.733. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 459 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 316056 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to ILE. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -124.803. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -124.803. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 494 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 380316 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to LYS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -207.279. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -207.279. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 457 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 312384 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to LEU. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -186.653. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -186.653. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 479 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 352776 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to MET. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -206.614. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -206.614. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 494 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 380316 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to ASN. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -217.743. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -217.743. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 457 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 312384 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to PRO. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns 327.143. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns 327.143. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 515 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 418872 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to GLN. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -205.593. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -205.593. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 475 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 345432 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to ARG. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -201.654. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -201.654. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 562 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 505164 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to SER. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -222.27. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -222.27. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 522 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 431724 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to THR. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -196.805. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -196.805. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 457 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 312384 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to VAL. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -115.792. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -115.792. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 457 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 312384 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to TRP. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -182.472. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -182.472. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 457 rotamers at 11 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 312384 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLY169 to TYR. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -198.577. Baseline is -252.055
+protocols.simple_filters.DeltaFilter: Filter score returns -198.577. Baseline is -252.055
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 415 rotamers at 7 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 257716 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to ASP. Now relaxing...
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 403 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 242088 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to ASP. Now relaxing...
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 403 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 242088 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to ASP. Now relaxing...
+protocols.protein_interface_design.filters.FilterScanFilter: Computed baseline at position 199 with filter delta is -251.383
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 331 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 155956 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to ALA. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -250.767. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -250.767. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 384 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 226552 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to CYS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -250.608. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -250.608. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 403 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 242088 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to ASP. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -251.383. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -251.383. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 431 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 289156 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to GLU. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -251.074. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -251.074. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 342 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 170608 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to PHE. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -249.997. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -249.997. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 331 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 154956 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to GLY. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -250.046. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -250.046. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 390 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 234544 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to HIS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -251.431. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -251.431. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 390 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 234544 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to HIS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -251.431. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -251.431. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 374 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 213232 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to ILE. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -250.304. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -250.304. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 442 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 303808 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to LYS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -251.618. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -251.618. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 348 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 178600 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to LEU. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -252.06. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -252.06. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 398 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 245200 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to MET. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -250.823. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -250.823. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 424 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 279832 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to ASN. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -252.207. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -252.207. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 339 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 166612 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to PRO. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -220.339. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -220.339. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 522 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 410368 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to GLN. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -252.074. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -252.074. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 466 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 335776 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to ARG. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -250.98. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -250.98. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 438 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 298480 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to SER. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -251.851. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -251.851. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 384 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 226552 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to THR. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -251.452. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -251.452. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 339 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 166612 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to VAL. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -250.636. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -250.636. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 363 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 198580 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to TRP. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -248.761. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -248.761. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 360 rotamers at 6 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 194584 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue ASP199 to TYR. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -250.562. Baseline is -251.383
+protocols.simple_filters.DeltaFilter: Filter score returns -250.562. Baseline is -251.383
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 764 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 977452 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to SER. Now relaxing...
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 786 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 1035904 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to SER. Now relaxing...
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 786 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 1035904 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to SER. Now relaxing...
+protocols.protein_interface_design.filters.FilterScanFilter: Computed baseline at position 200 with filter delta is -253.282
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 624 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 653968 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to ALA. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -252.492. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -252.492. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 695 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 831752 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to CYS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -244.163. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -244.163. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 675 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 781672 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to ASP. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -240.293. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -240.293. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 657 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 736600 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to GLU. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -237.679. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -237.679. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 624 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 653968 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to PHE. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -110.639. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -110.639. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 624 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 653968 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to GLY. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -250.041. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -250.041. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 633 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 676504 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to HIS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -244.299. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -244.299. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 633 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 676504 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to HIS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -244.299. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -244.299. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 625 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 656472 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to ILE. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -181.834. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -181.834. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 759 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 992008 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to LYS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -239.96. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -239.96. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 630 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 668992 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to LEU. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -238.081. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -238.081. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 697 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 836760 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to MET. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -238.268. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -238.268. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 695 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 831752 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to ASN. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -240.111. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -240.111. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 629 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 666488 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to PRO. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns 19.256. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns 19.256. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 705 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 856792 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to GLN. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -241.216. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -241.216. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 702 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 849280 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to ARG. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -240.126. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -240.126. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 786 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 1035904 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to SER. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -253.282. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -253.282. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 695 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 831752 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to THR. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -245.433. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -245.433. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 624 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 653968 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to VAL. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -218.128. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -218.128. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 624 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 653968 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to TRP. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -44.3033. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -44.3033. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 624 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 653968 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue SER200 to TYR. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -133.103. Baseline is -253.282
+protocols.simple_filters.DeltaFilter: Filter score returns -133.103. Baseline is -253.282
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 767 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 1011140 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to GLU. Now relaxing...
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 767 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 1011140 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to GLU. Now relaxing...
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 767 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 1011140 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to GLU. Now relaxing...
+protocols.protein_interface_design.filters.FilterScanFilter: Computed baseline at position 201 with filter delta is -256.762
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 594 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 622956 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to ALA. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -256. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -256. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 674 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 813676 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to CYS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -254.908. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -254.908. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 657 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 773148 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to ASP. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -254.909. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -254.909. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 767 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating DensePDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 1011140 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to GLU. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -256.762. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -256.762. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 605 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 649180 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to PHE. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -253.038. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -253.038. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 594 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 622956 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to GLY. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -253.313. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -253.313. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 655 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 768380 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to HIS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -256.868. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -256.868. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 655 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 768380 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to HIS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -256.868. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -256.868. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter succeeds
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 655 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 768380 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to ILE. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -255.477. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -255.477. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 775 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 1054460 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to LYS. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -256.709. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -256.709. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 620 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 684940 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to LEU. Now relaxing...
+protocols.simple_filters.DeltaFilter: Filter score returns -255.432. Baseline is -256.762
+protocols.simple_filters.DeltaFilter: Filter score returns -255.432. Baseline is -256.762
+protocols.protein_interface_design.filters.FilterScanFilter: Triage filter fails
+core.pack.task: Packer task: initialize from command line() 
+core.pack.pack_rotamers: built 692 rotamers at 12 positions.
+core.pack.interaction_graph.interaction_graph_factory: Instantiating PDInteractionGraph
+core.pack.interaction_graph.interaction_graph_factory: IG: 856588 bytes
+protocols.protein_interface_design.filters.FilterScanFilter: Mutating residue GLU201 to MET. Now relaxing...
+protoco

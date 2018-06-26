@@ -1,0 +1,25 @@
+  <SCOREFXNS>
+    <ScoreFunction name="ref" weights="ref2015.wts"/>
+    <ScoreFunction name="ref_buns_02" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="0.2"/>
+    </ScoreFunction>
+    <ScoreFunction name="ref_buns_04" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="0.4"/>
+    </ScoreFunction>
+    <ScoreFunction name="ref_buns_06" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="0.6"/>
+    </ScoreFunction>
+    <ScoreFunction name="ref_buns_08" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="0.8"/>
+    </ScoreFunction>
+    <ScoreFunction name="ref_buns_10" weights="ref2015.wts">
+        <Reweight scoretype="buried_unsatisfied_penalty" weight="1.0"/>
+    </ScoreFunction>
+  </SCOREFXNS>
+
+  <TASKOPERATIONS>
+    <ExtraRotamersGeneric name="ex" ex1="yes" ex2="yes" extrachi_cutoff="0"/>
+    <LimitAromaChi2 name="aro" include_trp="yes"/>
+    <IncludeCurrent name="cur"/>
+    <RestrictToRepacking name="nataa"/>
+  </TASKOPERATIONS>

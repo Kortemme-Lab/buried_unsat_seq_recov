@@ -1,0 +1,32 @@
+<ROSETTASCRIPTS>
+
+  <xi:include href="shared_defs.xml"/>
+
+  <TASKOPERATIONS>
+    <ReadResfile name="seqpos" filename="%%in_resfile%%" />
+  </TASKOPERATIONS>
+
+  <MOVERS>
+    <TaskAwareMinMover name="min" scorefxn="%%sfxn%%" chi="1" bb="0" jump="0" 
+        tolerance="0.00001" task_operations="seqpos,ex,aro,cur"/>
+  </MOVERS>
+
+  <FILTERS>
+    <ScoreType name="score" scorefxn="%%sfxn%%" threshold="0"/>
+    <FilterScan
+        name="scan"
+        filter="score"
+        scorefxn="%%sfxn%%" 
+        task_operations="seqpos,ex,aro,cur"
+        relax_mover="min"
+        dump_pdb="1" 
+        dump_pdb_name="%%out_pdb%%" 
+        report_all="1"
+        score_log_file="%%out_score%%"/>
+  </FILTERS>
+
+  <PROTOCOLS>
+    <Add filter_name="scan"/>
+  </PROTOCOLS>
+
+</ROSETTASCRIPTS>
