@@ -5,6 +5,8 @@ source helpers.sh
 mkdir -p $INPUTS/pdb/$SFXN
 mkdir -p $INPUTS/pdb/$SFXN/logs
 
+rm -rf $INPUTS/pdb/$SFXN/*
+
 qsub \
     -t 1-$NUM_PDBS \
     -o $INPUTS/pdb/$SFXN/logs \

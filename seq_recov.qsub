@@ -9,7 +9,10 @@ mkdir -p $OUTPUTS/$SFXN/misc
 mkdir -p $OUTPUTS/$SFXN/score
 mkdir -p $OUTPUTS/$SFXN/pdb
 
-rm $BENCHMARK/logs/$SFXN/*
+rm -f $BENCHMARK/$SFXN/log/*
+rm -f $BENCHMARK/$SFXN/misc/*
+rm -f $BENCHMARK/$SFXN/score/*
+rm -f $BENCHMARK/$SFXN/pdb/*
 
 qsub \
     -t 1-$NUM_PDBS \
