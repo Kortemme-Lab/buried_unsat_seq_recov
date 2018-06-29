@@ -9,8 +9,11 @@ source helpers.sh
 #$ -l netapp=1G,scratch=1G         #-- SGE resources (home and scratch disks)
 #$ -l h_rt=24:00:00                #-- runtime limit (see above; this requests 24 hours)
 
+# Using the unrelaxed structures, because relaxing seems to move the structures 
+# a lot, and may make the native recovery benchmark too easy.
+
 $BIN/rosetta_scripts.$ROSETTA_BUILD                                     \
-    -in:file:s $INPUTS/pdb/$SFXN/$PDB.pdb                               \
+    -in:file:s $INPUTS/pdb/orig/$PDB.pdb                                \
     -out:prefix $OUTPUTS/$SFXN/misc/                                    \
     -out:no_nstruct_label                                               \
     -out:overwrite                                                      \
