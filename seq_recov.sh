@@ -10,7 +10,7 @@ source helpers.sh
 #$ -l h_rt=24:00:00                #-- runtime limit (see above; this requests 24 hours)
 
 $BIN/rosetta_scripts.$ROSETTA_BUILD                                     \
-    -in:file:s $INPUTS/pdb/$SFXN/$PDB.pdb                               \
+    -in:file:s $INPUTS/pdb/orig/$PDB.pdb                                \
     -out:prefix $OUTPUTS/$SFXN/misc/                                    \
     -out:no_nstruct_label                                               \
     -out:overwrite                                                      \
@@ -19,4 +19,6 @@ $BIN/rosetta_scripts.$ROSETTA_BUILD                                     \
         sfxn=$SFXN                                                      \
         in_resfile=$INPUTS/resfile/$PDB.resfile                         \
         out_score=$OUTPUTS/$SFXN/score/$PDB.scores                      \
+        out_pdb=$OUTPUTS/$SFXN/pdb/$PDB.                                \
+        dump_pdb=$DUMP_PDB                                              \
 

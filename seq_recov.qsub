@@ -16,6 +16,6 @@ rm -f $BENCHMARK/$SFXN/pdb/*
 
 qsub \
     -t 1-$NUM_PDBS \
-    -o $OUTPUTS/$SFXN/logs \
+    -o $OUTPUTS/$SFXN/log \
     -v SFXN=${SFXN} \
     seq_recov.sh

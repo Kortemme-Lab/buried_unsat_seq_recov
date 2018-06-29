@@ -20,7 +20,9 @@
         task_operations="seqpos,ex,aro,cur"
         relax_mover="min"
         report_all="1"
-        score_log_file="%%out_score%%"/>
+        score_log_file="%%out_score%%"
+        dump_pdb_name="%%out_pdb%%"
+        dump_pdb="%%dump_pdb%%"/>
   </FILTERS>
 
   <PROTOCOLS>
