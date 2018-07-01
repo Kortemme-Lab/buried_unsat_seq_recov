@@ -25,10 +25,4 @@ if [ "$SFXN" = "" ]; then
     exit 1
 fi
 
-if [ "$PDB" = "" ]; then
-    echo "Usage: PDB=... $0"
-    echo "No PDB specified."
-    exit 1
-fi
-
 
