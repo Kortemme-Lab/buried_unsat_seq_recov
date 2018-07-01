@@ -1,0 +1,9 @@
+<ROSETTASCRIPTS>
+
+  <xi:include href="shared_defs.xml"/>
+
+  <PROTOCOLS/>
+  <OUTPUT scorefxn="%%sfxn%%"/>
+
+</ROSETTASCRIPTS>
+
