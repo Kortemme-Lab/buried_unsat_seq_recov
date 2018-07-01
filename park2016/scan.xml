@@ -8,7 +8,7 @@
 
   <MOVERS>
     <TaskAwareMinMover name="min" scorefxn="%%sfxn%%" chi="1" bb="0" jump="0" 
-        tolerance="0.00001" task_operations="seqpos,ex,aro,cur"/>
+        tolerance="0.00001" task_operations="seqpos,ex,cur"/>
   </MOVERS>
 
   <FILTERS>
@@ -17,7 +17,7 @@
         name="scan"
         filter="score"
         scorefxn="%%sfxn%%" 
-        task_operations="seqpos,ex,aro,cur"
+        task_operations="seqpos,ex,cur"
         relax_mover="min"
         report_all="1"
         score_log_file="%%out_score%%"
