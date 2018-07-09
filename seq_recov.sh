@@ -28,6 +28,6 @@ $BIN/rosetta_scripts.$ROSETTA_BUILD                                     \
         sfxn=$SFXN                                                      \
         in_resfile=$INPUTS/resfile/$PDB.resfile                         \
         out_score=$OUTPUTS/$SFXN/score/$PDB.scores                      \
-        out_pdb=$OUTPUTS/$SFXN/pdb/$PDB.                                \
+        out_pdb=$([ $DUMP_PDB == "yes" ] && echo "$OUTPUTS/$SFXN/pdb/$PDB." || echo "") \
         dump_pdb=$DUMP_PDB                                              \
 
