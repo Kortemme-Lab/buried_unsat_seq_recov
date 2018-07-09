@@ -6,7 +6,7 @@ PDBS=($INPUTS/pdb/orig/????.pdb)
 NUM_PDBS=${#PDBS[*]}
 
 if [ "$SGE_TASK_ID" != "" ]; then
-    PDB=$(basename ${PDBS[((SGE_TASK_ID+1))]})
+    PDB=$(basename ${PDBS[((SGE_TASK_ID-1))]})
     PDB=${PDB%.pdb}
     DUMP_PDB="no"
 else
