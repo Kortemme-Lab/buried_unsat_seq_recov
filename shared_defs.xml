@@ -18,8 +18,7 @@
   </SCOREFXNS>
 
   <TASKOPERATIONS>
-    <ExtraRotamersGeneric name="ex" ex1="yes" ex2="yes" extrachi_cutoff="0"/>
-    <LimitAromaChi2 name="aro" include_trp="yes"/>
+    <ExtraRotamersGeneric name="ex" ex1="yes" ex2="yes" ex1aro="yes" ex2aro="yes" extrachi_cutoff="0"/>
     <IncludeCurrent name="cur"/>
     <RestrictToRepacking name="nataa"/>
   </TASKOPERATIONS>
