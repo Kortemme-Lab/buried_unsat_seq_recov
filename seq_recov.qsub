@@ -4,15 +4,11 @@ source helpers.sh
 
 NUM_PDBS=${#PDBS[*]}
 
+rm -f $OUTPUTS/$SFXN
 mkdir -p $OUTPUTS/$SFXN/log
 mkdir -p $OUTPUTS/$SFXN/misc
 mkdir -p $OUTPUTS/$SFXN/score
 mkdir -p $OUTPUTS/$SFXN/pdb
-
-rm -f $BENCHMARK/$SFXN/log/*
-rm -f $BENCHMARK/$SFXN/misc/*
-rm -f $BENCHMARK/$SFXN/score/*
-rm -f $BENCHMARK/$SFXN/pdb/*
 
 qsub \
     -t 1-$NUM_PDBS \
