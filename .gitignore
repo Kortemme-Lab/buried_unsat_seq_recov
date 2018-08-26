@@ -3,4 +3,6 @@
 *.svg
 /sandbox
 /vreven2015
-default.sc
+*.sc
+*.pml
+*.pse

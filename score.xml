@@ -2,7 +2,16 @@
 
   <xi:include href="shared_defs.xml"/>
 
-  <PROTOCOLS/>
+  <MOVERS>
+      <RunSimpleMetrics name="metrics">
+        <PolarGroupBurialPyMolStringMetric verbose="yes" scorefxn="%%sfxn%%" />
+      </RunSimpleMetrics>
+  </MOVERS>
+
+  <PROTOCOLS>
+      <Add mover_name="metrics"/>
+  </PROTOCOLS>
+
   <OUTPUT scorefxn="%%sfxn%%"/>
 
 </ROSETTASCRIPTS>

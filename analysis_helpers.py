@@ -91,15 +91,14 @@ class Mutation:
     mut = attrib()
     score = attrib()
 
-
-def parse_score_files(sfxn):
+def parse_score_files(sfxn, probs=True):
     scores = {}
     paths = OUTPUTS / sfxn / 'score'
 
     for path in paths.glob('*.scores'):
         scores.update(parse_score_file(path))
 
-    return probs_from_scores(scores)
+    return probs_from_scores(scores) if probs else scores
 
 def parse_score_file(path):
     scores = {}
@@ -157,7 +156,19 @@ def parse_pssm(path):
 
     return pssm
     
-def probs_from_scores(scores):
+def normalize_scores(scores):
+    normed = {}
+
+    for key in scores:
+        min_score = min(scores[key].values())
+        normed[key] = {
+                k: v - min_score
+                for k, v in scores[key].items()
+        }
+
+    return normed
+
+def probs_from_scores(scores, log=False):
     probs = {}
 
     # The rosetta score function is approximately in units of kcal/mol.
@@ -170,6 +181,8 @@ def probs_from_scores(scores):
                 for resn in scores[key]
         }
         probs[key] = normalize(boltzmann_weights)
+        if log:
+            probs[key] = {k: np.log10(v) for k, v in probs[key].items()}
 
     return probs
 
@@ -178,6 +191,16 @@ def probs_from_counts(expected):
     for key in expected:
         probs[key] = normalize(expected[key])
     return probs
+
+def print_ranked_list(ranking, reduce=lambda x: x, reverse=False, limit=None):
+    sorted_items = sorted(
+            ranking.keys(),
+            key=lambda x: reduce(ranking[x]),
+            reverse=reverse,
+    )
+    for i, item in enumerate(sorted_items):
+        if i and i == limit: break
+        print(item, reduce(ranking[item]))
 
 
 def normalize(x):
