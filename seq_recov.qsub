@@ -4,7 +4,7 @@ source helpers.sh
 
 NUM_PDBS=${#PDBS[*]}
 
-rm -f $OUTPUTS/$SFXN
+rm -rf $OUTPUTS/$SFXN
 mkdir -p $OUTPUTS/$SFXN/log
 mkdir -p $OUTPUTS/$SFXN/misc
 mkdir -p $OUTPUTS/$SFXN/score
