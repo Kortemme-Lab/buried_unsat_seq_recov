@@ -5,14 +5,9 @@
   <MOVERS>
     <FastRelax name="relax"
       scorefxn="%%sfxn%%"
-      task_operations="ex,aro,cur">
-      <MoveMap bb="yes" chi="yes" jump="no"/>
+      task_operations="ex,cur">
+      <MoveMap bb="no" chi="yes" jump="no"/>
     </FastRelax>
-
-    <PackRotamersMover
-      name="repack"
-      scorefxn="%%sfxn%%"
-      task_operations="nataa,ex,aro,cur"/>
   </MOVERS>
 
   <FILTERS>
@@ -31,7 +26,6 @@
         -relax:ramp_constraints false                                       \
     -->
     <Add mover_name="relax"/>
-    <Add mover_name="repack"/>
     <Add filter_name="buried_unsats"/>
   </PROTOCOLS>
 
