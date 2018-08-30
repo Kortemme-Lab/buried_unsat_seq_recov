@@ -15,15 +15,15 @@ from attr import attrs, attrib
 from nonstdlib import title
 from more_itertools import one
 
+args = docopt.docopt(__doc__)
+pdb = args['<pdb>']
+resi = int(args['<resi>'])
+
 ref = normalize_scores(parse_score_files('ref', probs=False))
 ref_buns = normalize_scores(parse_score_files('ref_buns_10', probs=False))
 
 ref_probs = probs_from_scores(ref, log=True)
 ref_buns_probs = probs_from_scores(ref_buns, log=True)
-
-args = docopt.docopt(__doc__)
-pdb = args['<pdb>']
-resi = int(args['<resi>'])
 
 pos = one(x for x in ref if x.pdb == pdb and x.resi == resi)
 
