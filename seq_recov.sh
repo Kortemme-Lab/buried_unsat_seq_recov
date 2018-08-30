@@ -18,16 +18,12 @@ fi
 # Using the unrelaxed structures, because relaxing seems to move the structures 
 # a lot, and may make the native recovery benchmark too easy.
 
-$BIN/rosetta_scripts.$ROSETTA_BUILD                                     \
-    -in:file:s $INPUTS/pdb/orig/$PDB.pdb                                \
-    -out:prefix $OUTPUTS/$SFXN/misc/                                    \
-    -out:no_nstruct_label                                               \
-    -out:overwrite                                                      \
-    -parser:protocol $BENCHMARK/scan.xml                                \
-    -parser:script_vars                                                 \
-        sfxn=$SFXN                                                      \
-        in_resfile=$INPUTS/resfile/$PDB.resfile                         \
-        out_score=$OUTPUTS/$SFXN/score/$PDB.scores                      \
-        out_pdb=$([ $DUMP_PDB == "yes" ] && echo "$OUTPUTS/$SFXN/pdb/$PDB." || echo "") \
-        dump_pdb=$DUMP_PDB                                              \
-
+$BIN/buried_unsats.$ROSETTA_BUILD                                             \
+    -in:file:s $INPUTS/pdb/orig/$PDB.pdb                                      \
+    -packing:resfile $INPUTS/resfile/$PDB.resfile                             \
+    -app:resis 303 \
+    -app:sfxn $SFXN                                                           \
+    -app:out:scores $OUTPUTS/$SFXN/score/$PDB.scores                          \
+    -app:out:pdbs $OUTPUTS/$SFXN/pdb/${PDB}_                                  \
+    -app:out:save_pdbs $DUMP_PDB                                              \
+    
