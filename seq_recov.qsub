@@ -9,9 +9,10 @@ mkdir -p $OUTPUTS/$SFXN/log
 mkdir -p $OUTPUTS/$SFXN/misc
 mkdir -p $OUTPUTS/$SFXN/score
 mkdir -p $OUTPUTS/$SFXN/pdb
+mkdir -p $OUTPUTS/$SFXN/hbond
 
 qsub \
     -t 1-$NUM_PDBS \
     -o $OUTPUTS/$SFXN/log \
-    -v SFXN=${SFXN} \
+    -v ROSETTA,ROSETTA_BUILD,SFXN \
     seq_recov.sh
