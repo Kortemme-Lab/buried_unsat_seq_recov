@@ -16,8 +16,10 @@ if [ "$PDB" = "" ]; then
 fi
 
 $BIN/buried_unsats.$ROSETTA_BUILD                                             \
-    -in:file:s $INPUTS/pdb/$SFXN/$PDB.pdb                                     \
+    -in:file:s $INPUTS/pdb/ref/$PDB.pdb                                       \
     -app:sfxn $SFXN                                                           \
     -app:out:scores $OUTPUTS/$SFXN/score/$PDB.scores                          \
     -app:out:pdbs $OUTPUTS/$SFXN/pdb/${PDB}_                                  \
+    -app:out:hbonds $OUTPUTS/$SFXN/hbond/${PDB}_                              \
     -app:out:save_pdbs $DUMP_PDB                                              \
+    -app:out:save_hbonds $DUMP_PDB                                            \
